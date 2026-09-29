@@ -8,15 +8,14 @@ website:
     left:
       - text: Home
         href: index.qmd
-        
       - text: About Me
         href: about.qmd
       - text: Data Viz
-        href: dataviz.qmd
         menu: 
-        - text: data1
+        - text: Data1
           href: DataViz/IELTS.qmd
         - text: data2
+          href: DataViz/data2.qmd
 
 
 

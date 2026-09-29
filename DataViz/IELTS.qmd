@@ -5,6 +5,9 @@ description: |
 author: Molly Liao
 date: September 28, 2026
 format: html
+execute: 
+  warning: false
+  message: false
 ---
 
 ```{r}
