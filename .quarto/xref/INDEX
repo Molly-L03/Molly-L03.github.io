@@ -7,5 +7,11 @@
   },
   "resources.qmd": {
     "resources.html": "d5612866"
+  },
+  "dataviz.qmd": {
+    "dataviz.html": "4c4b38f7"
+  },
+  "DataViz/IELTS.qmd": {
+    "IELTS.html": "baf7d1fb"
   }
 }

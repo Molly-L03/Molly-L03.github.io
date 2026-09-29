@@ -6,11 +6,18 @@ website:
   title: "Molly Liao"
   navbar:
     left:
-      - href: index.qmd
-        text: Home
-      - about.qmd
-      - href: resources.qmd
-        text: Resources
+      - text: Home
+        href: index.qmd
+        
+      - text: About Me
+        href: about.qmd
+      - text: Data Viz
+        href: dataviz.qmd
+        menu: 
+        - text: data1
+          href: DataViz/IELTS.qmd
+        - text: data2
+
 
 
 format:

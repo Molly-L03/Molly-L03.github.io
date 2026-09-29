@@ -1,0 +1,22 @@
+---
+title: "IELTS Exam Overall Score by First Language"
+description: |
+  Analysis of IELTS Exam Results data from TidyTuesday
+author: Molly Liao
+date: September 28, 2026
+format: html
+---
+
+```{r}
+library(tidyverse)
+library(ggplot2)
+performance_by_first_language <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2026/2026-08-18/performance_by_first_language.csv')
+view(performance_by_first_language)
+```
+
+
+```{r}
+overall <- performance_by_first_language |> 
+    filter(part == "overall") |> 
+    group_by(language)
+```
