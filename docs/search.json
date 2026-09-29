@@ -2,8 +2,15 @@
   {
     "objectID": "index.html",
     "href": "index.html",
-    "title": "Molly-L03.github.io",
+    "title": "Molly Liao",
     "section": "",
-    "text": "This is a Quarto website.\nTo learn more about Quarto websites visit https://quarto.org/docs/websites."
+    "text": "Hello! I’m Molly Liao. Currently enrolled as a junior at Pomona College, majoring in Cognitive Science. I’m an international student from Taiwan, and I love my hometown &lt;3 Outside of shcool, school, I enjoy photography, workouts, and travelling!"
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "About this site"
   }
 ]

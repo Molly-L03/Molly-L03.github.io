@@ -1,7 +1,25 @@
 ---
-title: "Molly-L03.github.io"
+image: media/headshot.jpeg
+toc: false
+about: 
+  template: jolla
+  image-shape: round
+  image-width: 22em
+  links:
+    - text: LinkedIn
+      href: https://www.linkedin.com/in/molly-liao-25641a236/
+      target: _blank
+    - text: GitHub
+      href: https://github.com/Molly-L03
+      target: _blank
+    - text: Instagram
+      href: https://www.instagram.com/iammomo_l/
+      target: _blank 
+    - text: Photography
+      href: https://www.instagram.com/mollyla.cam/
+      target: _blank
+    - text: Email
+      href: tlcj2024@mymail.pomona.edu
 ---
 
-This is a Quarto website.
-
-To learn more about Quarto websites visit <https://quarto.org/docs/websites>.
+Hello! I'm Molly Liao. Currently enrolled as a junior at Pomona College, majoring in Cognitive Science. I'm an international student from Taiwan, and I love my hometown <3 Outside of shcool, school, I enjoy photography, workouts, and travelling! 
