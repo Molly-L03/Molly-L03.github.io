@@ -1,0 +1,30 @@
+---
+title: "Spotify Songs"
+description: |
+  Analysis of Spotify Songs from TidyTuesday
+author: Molly Liao
+date: September 29, 2026
+format:
+  html:
+    code-fold: true
+    code-tools: 
+      source: true
+execute: 
+  warning: false
+  message: false
+---
+```{r}
+library(tidyverse)
+library(ggplot2)
+spotify_songs <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2020/2020-01-21/spotify_songs.csv')
+view(spotify_songs)
+```
+
+
+```{r}
+ggplot(spotify_songs, aes(x = playlist_genre, y = track_popularity))+
+    geom_boxplot()+
+    labs(x = "Playlist genre",
+    y = "Popularity",
+    title = "Popularity by playlist genre")
+```

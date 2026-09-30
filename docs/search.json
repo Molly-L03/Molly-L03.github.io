@@ -19,5 +19,33 @@
     "title": "IELTS Exam Overall Score by First Language",
     "section": "",
     "text": "library(tidyverse)\nlibrary(ggplot2)\nperformance_by_first_language &lt;- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2026/2026-08-18/performance_by_first_language.csv')\nview(performance_by_first_language)\n\n\noverall &lt;- performance_by_first_language |&gt; \n    filter(part == \"overall\") |&gt; \n    group_by(language)"
+  },
+  {
+    "objectID": "DataViz/data2.html",
+    "href": "DataViz/data2.html",
+    "title": "Squirrels in Central Park",
+    "section": "",
+    "text": "Code\nlibrary(tidyverse)\nlibrary(ggplot2)\nsquirrel_data &lt;- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2023/2023-05-23/squirrel_data.csv')\nview(squirrel_data)\n\n\n\n\nCode\nsquirrel_data &lt;- squirrel_data |&gt; \n  filter(Age %in% c(\"Adult\", \"Juvenile\"))\n\n\n\n\nCode\nggplot(squirrel_data, aes(x = X, y = Y, color = Age))+\n  geom_point(\n    size = 1,\n    alpha = 0.3)+\n  labs(\n    x = \"Longtitude\",\n    y = \"Latitude\",\n    title = \"Adults and Juvenile Squirrels Sighted in Central Park\")"
+  },
+  {
+    "objectID": "DataViz/data2.html#analysis",
+    "href": "DataViz/data2.html#analysis",
+    "title": "Squirrels in Central Park",
+    "section": "",
+    "text": "Code\nlibrary(tidyverse)\nlibrary(ggplot2)\nsquirrel_data &lt;- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2023/2023-05-23/squirrel_data.csv')\nview(squirrel_data)\n\n\n\n\nCode\nsquirrel_data &lt;- squirrel_data |&gt; \n  filter(Age %in% c(\"Adult\", \"Juvenile\"))\n\n\n\n\nCode\nggplot(squirrel_data, aes(x = X, y = Y, color = Age))+\n  geom_point(\n    size = 1,\n    alpha = 0.3)+\n  labs(\n    x = \"Longtitude\",\n    y = \"Latitude\",\n    title = \"Adults and Juvenile Squirrels Sighted in Central Park\")"
+  },
+  {
+    "objectID": "DataViz/squirrels.html",
+    "href": "DataViz/squirrels.html",
+    "title": "Squirrels in Central Park",
+    "section": "",
+    "text": "Code\nlibrary(tidyverse)\nlibrary(ggplot2)\nsquirrel_data &lt;- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2023/2023-05-23/squirrel_data.csv')\nview(squirrel_data)\n\n\n\n\nCode\nsquirrel_data &lt;- squirrel_data |&gt; \n  filter(Age %in% c(\"Adult\", \"Juvenile\"))\n\n\n\n\nCode\nggplot(squirrel_data, aes(x = X, y = Y, color = Age))+\n  geom_point(\n    size = 1,\n    alpha = 0.3)+\n  labs(\n    x = \"Longtitude\",\n    y = \"Latitude\",\n    title = \"Adults and Juvenile Squirrels Sighted in Central Park\")"
+  },
+  {
+    "objectID": "DataViz/spotify.html",
+    "href": "DataViz/spotify.html",
+    "title": "Spotify Songs",
+    "section": "",
+    "text": "Code\nlibrary(tidyverse)\nlibrary(ggplot2)\nspotify_songs &lt;- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2020/2020-01-21/spotify_songs.csv')\nview(spotify_songs)\n\n\n\n\nCode\nggplot(spotify_songs, aes(x = playlist_genre, y = track_popularity))+\n    geom_boxplot()+\n    labs(x = \"Playlist genre\",\n    y = \"Popularity\",\n    title = \"Popularity by playlist genre\")"
   }
 ]

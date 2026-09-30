@@ -1,0 +1,38 @@
+---
+title: "Squirrels in Central Park"
+description: |
+  Analysis of Central Park Squirrel Census data from TidyTuesday
+author: Molly Liao
+date: September 29, 2026
+format:
+  html:
+    code-fold: true
+    code-tools: 
+      source: true
+execute: 
+  warning: false
+  message: false
+---
+
+```{r}
+library(tidyverse)
+library(ggplot2)
+squirrel_data <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2023/2023-05-23/squirrel_data.csv')
+view(squirrel_data)
+```
+
+```{r}
+squirrel_data <- squirrel_data |> 
+  filter(Age %in% c("Adult", "Juvenile"))
+```
+
+```{r}
+ggplot(squirrel_data, aes(x = X, y = Y, color = Age))+
+  geom_point(
+    size = 1,
+    alpha = 0.3)+
+  labs(
+    x = "Longtitude",
+    y = "Latitude",
+    title = "Adults and Juvenile Squirrels Sighted in Central Park")
+```

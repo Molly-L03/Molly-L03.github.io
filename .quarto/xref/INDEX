@@ -16,5 +16,11 @@
   },
   "DataViz/data2.qmd": {
     "data2.html": "da00138a"
+  },
+  "DataViz/squirrels.qmd": {
+    "squirrels.html": "c152f168"
+  },
+  "DataViz/spotify.qmd": {
+    "spotify.html": "f28e337f"
   }
 }

@@ -12,10 +12,10 @@ website:
         href: about.qmd
       - text: Data Viz
         menu: 
-        - text: Data1
-          href: DataViz/IELTS.qmd
-        - text: data2
-          href: DataViz/data2.qmd
+        - text: Squirrels in Central Park
+          href: DataViz/squirrels.qmd
+        - text: Spotify Songs
+          href: DataViz/spotify.qmd
 
 
 
