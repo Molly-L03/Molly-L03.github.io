@@ -7,12 +7,22 @@ date: September 29, 2026
 format:
   html:
     code-fold: true
-    code-tools: 
-      source: true
+    code-tools: true
+    source: true
+    code-overflow: wrap
 execute: 
   warning: false
   message: false
 ---
+**Data Source:** 
+Data Science Learning Community. (2020). *Tidy Tuesday: 2020-01-21*. TidyTuesday. [GitHub](https://github.com/rfordatascience/tidytuesday/tree/main/data/2020/2020-01-21)
+
+
+**Original data source / spotifyr:**
+Thompson, C., Parry, J., Phipps, D., & Wolff, T. (2020). *spotifyr: R wrapper for the Spotify Web API.*  [spotifyr](https://www.rcharlie.com/spotifyr/)
+
+
+
 ```{r}
 library(tidyverse)
 library(ggplot2)

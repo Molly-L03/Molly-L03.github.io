@@ -7,12 +7,20 @@ date: September 29, 2026
 format:
   html:
     code-fold: true
-    code-tools: 
-      source: true
+    code-tools: true
+    source: true
+    code-overflow: wrap
 execute: 
   warning: false
   message: false
 ---
+**Data Source:**
+Data Science Learning Community. (2023). *Tidy Tuesday: 2023-05-23*. TidyTuesday. [GitHub](https://github.com/rfordatascience/tidytuesday/tree/main/data/2023/2023-05-23)
+ 
+
+**Original data source:**
+ NYC Open Data. (2018). *2018 Central Park Squirrel Census – Squirrel Data*. City of New York. [NYC Open Data](https://data.cityofnewyork.us/Environment/2018-Central-Park-Squirrel-Census-Squirrel-Data/vfnx-vebw/about_data)
+
 
 ```{r}
 library(tidyverse)

@@ -39,13 +39,13 @@
     "href": "DataViz/squirrels.html",
     "title": "Squirrels in Central Park",
     "section": "",
-    "text": "Code\nlibrary(tidyverse)\nlibrary(ggplot2)\nsquirrel_data &lt;- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2023/2023-05-23/squirrel_data.csv')\nview(squirrel_data)\n\n\n\n\nCode\nsquirrel_data &lt;- squirrel_data |&gt; \n  filter(Age %in% c(\"Adult\", \"Juvenile\"))\n\n\n\n\nCode\nggplot(squirrel_data, aes(x = X, y = Y, color = Age))+\n  geom_point(\n    size = 1,\n    alpha = 0.3)+\n  labs(\n    x = \"Longtitude\",\n    y = \"Latitude\",\n    title = \"Adults and Juvenile Squirrels Sighted in Central Park\")"
+    "text": "Data Source: Data Science Learning Community. (2023). Tidy Tuesday: 2023-05-23. TidyTuesday. GitHub\nOriginal data source: NYC Open Data. (2018). 2018 Central Park Squirrel Census – Squirrel Data. City of New York. NYC Open Data\n\n\nCode\nlibrary(tidyverse)\nlibrary(ggplot2)\nsquirrel_data &lt;- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2023/2023-05-23/squirrel_data.csv')\nview(squirrel_data)\n\n\n\n\nCode\nsquirrel_data &lt;- squirrel_data |&gt; \n  filter(Age %in% c(\"Adult\", \"Juvenile\"))\n\n\n\n\nCode\nggplot(squirrel_data, aes(x = X, y = Y, color = Age))+\n  geom_point(\n    size = 1,\n    alpha = 0.3)+\n  labs(\n    x = \"Longtitude\",\n    y = \"Latitude\",\n    title = \"Adults and Juvenile Squirrels Sighted in Central Park\")"
   },
   {
     "objectID": "DataViz/spotify.html",
     "href": "DataViz/spotify.html",
     "title": "Spotify Songs",
     "section": "",
-    "text": "Code\nlibrary(tidyverse)\nlibrary(ggplot2)\nspotify_songs &lt;- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2020/2020-01-21/spotify_songs.csv')\nview(spotify_songs)\n\n\n\n\nCode\nggplot(spotify_songs, aes(x = playlist_genre, y = track_popularity))+\n    geom_boxplot()+\n    labs(x = \"Playlist genre\",\n    y = \"Popularity\",\n    title = \"Popularity by playlist genre\")"
+    "text": "Data Source: Data Science Learning Community. (2020). Tidy Tuesday: 2020-01-21. TidyTuesday. GitHub\nOriginal data source / spotifyr: Thompson, C., Parry, J., Phipps, D., & Wolff, T. (2020). spotifyr: R wrapper for the Spotify Web API. spotifyr\n\n\nCode\nlibrary(tidyverse)\nlibrary(ggplot2)\nspotify_songs &lt;- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2020/2020-01-21/spotify_songs.csv')\nview(spotify_songs)\n\n\n\n\nCode\nggplot(spotify_songs, aes(x = playlist_genre, y = track_popularity))+\n    geom_boxplot()+\n    labs(x = \"Playlist genre\",\n    y = \"Popularity\",\n    title = \"Popularity by playlist genre\")"
   }
 ]
