@@ -11,9 +11,6 @@ about:
       target: _blank
     - text: GitHub
       href: https://github.com/Molly-L03
-      target: _blank
-    - text: Instagram
-      href: https://www.instagram.com/iammomo_l/
       target: _blank 
     - text: Photography
       href: https://www.instagram.com/mollyla.cam/

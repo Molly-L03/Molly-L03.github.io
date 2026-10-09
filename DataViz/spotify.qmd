@@ -21,7 +21,7 @@ Data Science Learning Community. (2020). *Tidy Tuesday: 2020-01-21*. TidyTuesday
 **Original data source / spotifyr:**
 Thompson, C., Parry, J., Phipps, D., & Wolff, T. (2020). *spotifyr: R wrapper for the Spotify Web API.*  [spotifyr](https://www.rcharlie.com/spotifyr/)
 
-
+The boxplot shows the popularity rating of different genre on Spotify. Pop music followed by latin music have popularities just over 50, while EDM has the lowest popularity. 
 
 ```{r}
 library(tidyverse)
@@ -32,9 +32,14 @@ view(spotify_songs)
 
 
 ```{r}
-ggplot(spotify_songs, aes(x = playlist_genre, y = track_popularity))+
+ggplot(
+  spotify_songs, 
+  aes(
+    x = reorder(playlist_genre, track_popularity, FUN = median),
+    y = track_popularity))+
     geom_boxplot()+
     labs(x = "Playlist genre",
     y = "Popularity",
     title = "Popularity by playlist genre")
 ```
+

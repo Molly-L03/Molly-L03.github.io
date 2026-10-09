@@ -21,6 +21,7 @@ Data Science Learning Community. (2023). *Tidy Tuesday: 2023-05-23*. TidyTuesday
 **Original data source:**
  NYC Open Data. (2018). *2018 Central Park Squirrel Census – Squirrel Data*. City of New York. [NYC Open Data](https://data.cityofnewyork.us/Environment/2018-Central-Park-Squirrel-Census-Squirrel-Data/vfnx-vebw/about_data)
 
+The scatterplot illustrates the location squirrels were spotted in Central Park. They were mostly adults squirrels with a few juveniles. One thing to note on the graph is the empty space in the middle of the park, which is the where the lake is located, hence, no squirrels were spotted.   
 
 ```{r}
 library(tidyverse)
