@@ -14,6 +14,8 @@ website:
           href: DataViz/squirrels.qmd
         - text: Spotify Songs
           href: DataViz/spotify.qmd
+        - text: Kdramas
+          href: DataViz/kdrama.qmd
 
 
 
