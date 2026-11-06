@@ -136,6 +136,6 @@ perm_stats |>
     p_val_ave = mean(observe_avg_diff > perm_avg_diff))
 ```
 
-Because this is well below the threshhold (p < 0.05), we reject the null hypothesis. The data provide strong evidence that people in the more-exercise group have lower average stress than those in the less-exercise group, which is consistent with our alternative hypothesis. This matches the histogram above, where the observed difference falls far outside the range of differences produced by chance.
+Because this is well below the threshold (p < 0.05), we reject the null hypothesis. The data provide strong evidence that people in the more-exercise group have lower average stress than those in the less-exercise group, which is consistent with our alternative hypothesis. This matches the histogram above, where the observed difference falls far outside the range of differences produced by chance.
 
 One thing to keep in mind is that, physical activity is just one of the factors that could contribute to stress level specifically in this dataset. There could be other factors such as sleep duration, nutrition, occupation, etc., affect stress levels.
