@@ -15,7 +15,7 @@ execute:
   message: false
 ---
 
-I am a big fan of Korean dramas, in this project I want to explore the data from [Kdramas_Analysis](https://github.com/apoorvareddy612/Kdramas_Analysis/blob/main/kdrama.csv) to answer the follwing questions:
+I am a big fan of Korean dramas, in this project I want to explore the data put togethere by apoorvareddy612 [Kdramas_Analysis](https://github.com/apoorvareddy612/Kdramas_Analysis/blob/main/kdrama.csv) to answer the follwing questions:
 - What are the most common genre among these series
 - Which actor is involved in the most dramas
 

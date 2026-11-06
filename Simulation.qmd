@@ -1,0 +1,52 @@
+---
+title: "Simulation"
+description: |
+  
+author: Molly Liao
+date: November 5, 2026
+format:
+  html:
+    code-fold: true
+    code-tools: true
+    source: true
+    code-overflow: wrap
+execute: 
+  warning: false
+  message: false
+---
+Credibility: Laksika Tharmalingam created this dataset and is available on [Kaggle] (https://www.kaggle.com/datasets/uom190346a/sleep-health-and-lifestyle-dataset?resource=download), where I downloaded the CSV file. 
+
+Dataset Overview:
+The Sleep Health and Lifestyle Dataset comprises 400 rows and 13 columns, covering a wide range of variables related to sleep and daily habits. It includes details such as gender, age, occupation, sleep duration, quality of sleep, physical activity level, stress levels, BMI category, blood pressure, heart rate, daily steps, and the presence or absence of sleep disorder. 
+
+In this permutation test, I will use columns:
+- Sleep Duration (hours): The number of hours the person sleeps per day.
+- Physical Activity Level (minutes/day): The number of minutes the person engages in physical activity daily.
+- Sleep Disorder: The presence or absence of a sleep disorder in the person (None, Insomnia, Sleep Apnea).
+
+I want to explore whether people who engage in more physical activity daily have more hours of sleep per day. In this test, we will first wrangle the data, to see if we need to exclude those with a sleep disorder to prevent skewed results. Then we will split up the group by the median physical activity into high and low physical activity.
+
+The null hypothesis is that the average sleep hours will be the same regardless of their daily physical activity.  
+
+```{r}
+library(ggplot2)
+library(tidyverse)
+sleep <- read_csv("Sleep_health_and_lifestyle_dataset.csv")
+head(Sleep_health_and_lifestyle_dataset)
+```
+
+
+```{r}
+sleep |> 
+    summarize(avg_exercise = median(`Physical Activity Level`, na.rm = TRUE))
+sleep |> 
+    group_by(`Sleep Disorder`) |> 
+    summarize(avg_sleep = mean(`Sleep Duration`))
+
+sleep |> 
+    ggplot(aes(x = `Sleep Duration`, y = `Physical Activity Level`))+
+    geom_point()+
+    labs(
+        aes(label= `Sleep Disorder`)
+    )
+```

@@ -16,6 +16,8 @@ website:
           href: DataViz/spotify.qmd
         - text: Kdramas
           href: DataViz/kdrama.qmd
+      - text: Simulation
+        href: Simulation.qmd
 
 
 
