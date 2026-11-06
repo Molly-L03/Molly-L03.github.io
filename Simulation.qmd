@@ -1,6 +1,6 @@
 ---
-title: "Simulation"
-description: |
+title: "Permutation Test"
+description: "Exploring the relation between physical activity and stress level"
   
 author: Molly Liao
 date: November 5, 2026
@@ -14,39 +14,84 @@ execute:
   warning: false
   message: false
 ---
-Credibility: Laksika Tharmalingam created this dataset and is available on [Kaggle] (https://www.kaggle.com/datasets/uom190346a/sleep-health-and-lifestyle-dataset?resource=download), where I downloaded the CSV file. 
+**Credit:** 
+Laksika Tharmalingam created this dataset and is available on [Kaggle](https://www.kaggle.com/datasets/uom190346a/sleep-health-and-lifestyle-dataset?resource=download), where I downloaded the CSV file. 
 
-Dataset Overview:
+**Dataset Overview:**
+
 The Sleep Health and Lifestyle Dataset comprises 400 rows and 13 columns, covering a wide range of variables related to sleep and daily habits. It includes details such as gender, age, occupation, sleep duration, quality of sleep, physical activity level, stress levels, BMI category, blood pressure, heart rate, daily steps, and the presence or absence of sleep disorder. 
 
 In this permutation test, I will use columns:
-- Sleep Duration (hours): The number of hours the person sleeps per day.
+
+- Stress Level (scale: 1-10): A subjective rating of the stress level experienced by the person, ranging from 1 to 10.
+
 - Physical Activity Level (minutes/day): The number of minutes the person engages in physical activity daily.
-- Sleep Disorder: The presence or absence of a sleep disorder in the person (None, Insomnia, Sleep Apnea).
 
-I want to explore whether people who engage in more physical activity daily have more hours of sleep per day. In this test, we will first wrangle the data, to see if we need to exclude those with a sleep disorder to prevent skewed results. Then we will split up the group by the median physical activity into high and low physical activity.
+I want to explore whether people who do more physical activity daily have lower stress levels. In this test, we will first wrangle the data, to see if we need to exclude those with a sleep disorder to prevent skewed results. Then we will split up the group by the median physical activity into high and low physical activity.
 
-The null hypothesis is that the average sleep hours will be the same regardless of their daily physical activity.  
+The null hypothesis is that the stress level will be the same regardless of their daily physical activity. The alternative hypothesis is that more exercise leads to less stress.  
 
 ```{r}
 library(ggplot2)
 library(tidyverse)
-sleep <- read_csv("Sleep_health_and_lifestyle_dataset.csv")
-head(Sleep_health_and_lifestyle_dataset)
+health <- read_csv("Sleep_health_and_lifestyle_dataset.csv")
 ```
 
 
 ```{r}
-sleep |> 
-    summarize(avg_exercise = median(`Physical Activity Level`, na.rm = TRUE))
-sleep |> 
-    group_by(`Sleep Disorder`) |> 
-    summarize(avg_sleep = mean(`Sleep Duration`))
+health |> 
+    summarize(avg_exercise = mean(`Physical Activity Level`, na.rm = TRUE), med_exercise = median(`Physical Activity Level`))
+```
 
-sleep |> 
-    ggplot(aes(x = `Sleep Duration`, y = `Physical Activity Level`))+
-    geom_point()+
-    labs(
-        aes(label= `Sleep Disorder`)
+Based on the median and average minutes of physical activity, we will use 60 as a cutoff.
+- Equal or more than 60 minutes will be the "more" group.
+- Less than 60 minutes will be the "less" group.  
+
+```{r}
+health <- health |> 
+    select(`Physical Activity Level`, `Stress Level`) |> 
+    mutate(
+        Exercise = if_else(`Physical Activity Level` >= 60, "more", "less")
     )
+health |> 
+    group_by(Exercise) |> 
+    summarize(avg_sress = mean(`Stress Level`))
+
+```
+
+Visualize the relationship of interest
+```{r}
+health |> 
+    ggplot(aes(x = Exercise, y = `Stress Level`))+
+    geom_boxplot()
+```
+
+Generate a null sampling distribution.
+
+```{r}
+perm_health <- function(rep, health){
+    health |> 
+        mutate(stress_perm = sample(`Stress Level`, replace = FALSE)) |> 
+        group_by(Exercise) |> 
+        summarize(
+            observe_avg = mean(`Stress Level`),
+            perm_avg = mean(stress_perm)
+        ) |> 
+        summarize(
+            observe_avg_diff = diff(observe_avg),
+            perm_avg_diff = diff(perm_avg),
+            rep = rep
+        )
+}
+```
+
+```{r}
+set.seed(500)
+perm_stats <- map(c(1:500), perm_health, health) |> 
+    list_rbind()
+
+perm_stats |> 
+    ggplot(aes(x = perm_avg_diff))+
+    geom_histogram(binwidth = .03)+
+    geom_vline(aes(xintercept = observe_avg_diff), color = "red")
 ```
