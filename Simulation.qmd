@@ -19,7 +19,7 @@ Laksika Tharmalingam created this dataset and is available on [Kaggle](https://w
 
 **Dataset Overview:**
 
-The Sleep Health and Lifestyle Dataset comprises 400 rows and 13 columns, covering a wide range of variables related to sleep and daily habits. It includes details such as gender, age, occupation, sleep duration, quality of sleep, physical activity level, stress levels, BMI category, blood pressure, heart rate, daily steps, and the presence or absence of sleep disorder. 
+The Sleep Health and Lifestyle Dataset comprises 374 rows and 13 columns, covering a wide range of variables related to sleep and daily habits. It includes details such as gender, age, occupation, sleep duration, quality of sleep, physical activity level, stress levels, BMI category, blood pressure, heart rate, daily steps, and the presence or absence of sleep disorder. Each row represents a person. 
 
 In this permutation test, I will use columns:
 
@@ -27,9 +27,9 @@ In this permutation test, I will use columns:
 
 - Physical Activity Level (minutes/day): The number of minutes the person engages in physical activity daily.
 
-I want to explore whether people who do more physical activity daily have lower stress levels. In this test, we will first wrangle the data, to see if we need to exclude those with a sleep disorder to prevent skewed results. Then we will split up the group by the median physical activity into high and low physical activity.
+I want to explore whether people who do more physical activity daily have lower stress levels. In this test, we will first split up the dataset into high- or low-physical-activity groups. Then we will 
 
-The null hypothesis is that the stress level will be the same regardless of their daily physical activity. The alternative hypothesis is that more exercise leads to less stress.  
+The null hypothesis is that the stress level will be the same regardless of their daily physical activity. The alternative hypothesis is that more exercise leads to lower stress level.  
 
 ```{r}
 library(ggplot2)
@@ -55,15 +55,23 @@ health <- health |>
     )
 health |> 
     group_by(Exercise) |> 
-    summarize(avg_sress = mean(`Stress Level`))
+    summarize(
+        avg_stress = mean(`Stress Level`),
+        avg_exercise_time = mean(`Physical Activity Level`),
+        med_exercise_time = median(`Physical Activity Level`) 
+    )
 
 ```
 
-Visualize the relationship of interest
+This boxplot visualized the observed 
 ```{r}
 health |> 
     ggplot(aes(x = Exercise, y = `Stress Level`))+
-    geom_boxplot()
+    geom_boxplot()+
+    labs(x = "Exercise groups",
+    y = "Self-rated Stress Level (1-10)",
+    title = "Stress level by exercise group")
+   
 ```
 
 Generate a null sampling distribution.
@@ -86,12 +94,27 @@ perm_health <- function(rep, health){
 ```
 
 ```{r}
-set.seed(500)
-perm_stats <- map(c(1:500), perm_health, health) |> 
+set.seed(5000) #fix the results of this shuffle
+perm_stats <- map(c(1:5000), perm_health, health) |> 
     list_rbind()
 
 perm_stats |> 
     ggplot(aes(x = perm_avg_diff))+
-    geom_histogram(binwidth = .03)+
-    geom_vline(aes(xintercept = observe_avg_diff), color = "red")
+    geom_histogram(binwidth = .07)+
+    geom_vline(aes(xintercept = observe_avg_diff, color = "Observed average difference \n-0.72"))+
+    scale_color_manual(values = c("Observed average difference \n-0.72" = "red"))+
+    labs(
+        title = "Null sampling distribution (Average)",
+        subtitle = "Bindwisth = .07",
+        x = "Permuted difference in average stress (more minus less)",
+        y = "Number of shuffles"
+    )
+```
+
+P-value
+
+```{r}
+perm_stats |>
+  summarize(
+    p_val_ave = mean(observe_avg_diff > perm_avg_diff))
 ```
