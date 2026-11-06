@@ -7,7 +7,6 @@ date: November 5, 2026
 format:
   html:
     code-fold: true
-    code-tools: true
     source: true
     code-overflow: wrap
 execute: 
@@ -15,6 +14,7 @@ execute:
   message: false
 ---
 **Credit:** 
+
 Laksika Tharmalingam created this dataset and is available on [Kaggle](https://www.kaggle.com/datasets/uom190346a/sleep-health-and-lifestyle-dataset?resource=download), where I downloaded the CSV file. 
 
 **Dataset Overview:**
@@ -27,7 +27,9 @@ In this permutation test, I will use columns:
 
 - Physical Activity Level (minutes/day): The number of minutes the person engages in physical activity daily.
 
-I want to explore whether people who do more physical activity daily have lower stress levels. In this test, we will first split up the dataset into high- or low-physical-activity groups. Then we will 
+**Question of interest:** 
+
+This semester, I started to work out more frequently and I found myself having a better mood and more energy whenever I hit the gym. Therefore, I want to explore whether people who do more physical activity have lower stress levels. In this test, we will first split up the dataset into high- or low-physical-activity groups. Then we will compare the average stress level of the two groups and use a permutation test to ask whether a difference that large could plausibly arise by chance if physical activity and stress were unrelated. We do this by repeatedly shuffling the stress scores across people, recording the difference in group averages each time, and checking where our observed difference falls in that distribution of shuffled differences. 
 
 The null hypothesis is that the stress level will be the same regardless of their daily physical activity. The alternative hypothesis is that more exercise leads to lower stress level.  
 
@@ -43,19 +45,25 @@ health |>
     summarize(avg_exercise = mean(`Physical Activity Level`, na.rm = TRUE), med_exercise = median(`Physical Activity Level`))
 ```
 
-Based on the median and average minutes of physical activity, we will use 60 as a cutoff.
+Based on the median and average minutes of physical activity, we will use 60 as a cutoff:
+
 - Equal or more than 60 minutes will be the "more" group.
+
 - Less than 60 minutes will be the "less" group.  
 
 ```{r}
+#adding a column that indicates the group
 health <- health |> 
     select(`Physical Activity Level`, `Stress Level`) |> 
     mutate(
         Exercise = if_else(`Physical Activity Level` >= 60, "more", "less")
     )
+
+#calculate and show the observed statistics between 2 groups
 health |> 
     group_by(Exercise) |> 
     summarize(
+        num_people = n(),
         avg_stress = mean(`Stress Level`),
         avg_exercise_time = mean(`Physical Activity Level`),
         med_exercise_time = median(`Physical Activity Level`) 
@@ -63,7 +71,7 @@ health |>
 
 ```
 
-This boxplot visualized the observed 
+This boxplot visualized the self-rated stress level by exercise groups. The group that exercise less (than 60 minutes) had a higher stress level of median = 7, while those exercise more (than 60 minutes) reported a lower stress level (median = 5).
 ```{r}
 health |> 
     ggplot(aes(x = Exercise, y = `Stress Level`))+
@@ -74,29 +82,36 @@ health |>
    
 ```
 
-Generate a null sampling distribution.
+To simulate what we’d see if exercise has no relationship with stress, we first wrote a function, perm_health(), that performs one round of the simulation. If the null hypothesis is true, which group a person belongs to doesn’t matter, so randomly reassigning stress scores across people should produce differences in group averages that arise purely by chance.
+
+In each round, the function (1) shuffles all the stress levels among the people in the data, (2) calculates the average stress level for the “more” and “less” exercise groups using both the original and the shuffled scores, and (3) returns the difference between those averages (more minus less) for both. (4) The argument rep isn’t used in the calculation. It labels which shuffle each result comes from.
 
 ```{r}
+#create a function that shuffles the stress level among all data and calculated the averages
 perm_health <- function(rep, health){
     health |> 
-        mutate(stress_perm = sample(`Stress Level`, replace = FALSE)) |> 
+        mutate(stress_perm = sample(`Stress Level`, replace = FALSE)) |> #(1)
         group_by(Exercise) |> 
-        summarize(
-            observe_avg = mean(`Stress Level`),
-            perm_avg = mean(stress_perm)
+        summarize( #(2)
+            observe_avg = mean(`Stress Level`), #original score
+            perm_avg = mean(stress_perm) #shuffled score
         ) |> 
-        summarize(
+        summarize( #(3)
             observe_avg_diff = diff(observe_avg),
             perm_avg_diff = diff(perm_avg),
-            rep = rep
+            rep = rep #(4)
         )
 }
 ```
 
+One shuffle isn’t enough to tell us what chance looks like, so we use map() to run the function 1000 times, once for each number from 1 to 1000, passing the same dataset each time. list_rbind() stacks the 1000 results into one data frame, and set.seed() makes the shuffles reproducible, so the results don’t change each time the document is rendered. 
+
 ```{r}
-set.seed(5000) #fix the results of this shuffle
-perm_stats <- map(c(1:5000), perm_health, health) |> 
+#obtain the data with 1000-times shuffling
+set.seed(1000) #fix the results of this shuffle
+perm_stats <- map(c(1:1000), perm_health, health) |> 
     list_rbind()
+
 
 perm_stats |> 
     ggplot(aes(x = perm_avg_diff))+
@@ -105,16 +120,22 @@ perm_stats |>
     scale_color_manual(values = c("Observed average difference \n-0.72" = "red"))+
     labs(
         title = "Null sampling distribution (Average)",
-        subtitle = "Bindwisth = .07",
+        subtitle = "Bindwith = .07",
         x = "Permuted difference in average stress (more minus less)",
         y = "Number of shuffles"
     )
 ```
 
-P-value
+The histogram shows the 1000 permuted differences, which is the null distribution: the differences in average stress we’d expect from chance alone. The red line marks the difference actually observed in the data (-0.72), which is inconsistent with the null distribution.
+
+The p-value is the probability of seeing a difference in average stress at least as extreme as ours, if exercise and stress are unrelated. Out of 1000 shuffles, none produced a difference as low as the observed -0.72, so the p-value is < 0.001. 
 
 ```{r}
 perm_stats |>
   summarize(
     p_val_ave = mean(observe_avg_diff > perm_avg_diff))
 ```
+
+Because this is well below the threshhold (p < 0.05), we reject the null hypothesis. The data provide strong evidence that people in the more-exercise group have lower average stress than those in the less-exercise group, which is consistent with our alternative hypothesis. This matches the histogram above, where the observed difference falls far outside the range of differences produced by chance.
+
+One thing to keep in mind is that, physical activity is just one of the factors that could contribute to stress level specifically in this dataset. There could be other factors such as sleep duration, nutrition, occupation, etc., affect stress levels.
