@@ -18,6 +18,8 @@ website:
           href: DataViz/kdrama.qmd
       - text: Simulation
         href: Simulation.qmd
+      - text: Ethics Dilemma
+        href: ds.ecienc.qmd
 
 
 

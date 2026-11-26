@@ -1,0 +1,46 @@
+---
+title: "Ethical dilemma: AI recruitment and gender discrimination at Amazon"
+author: Molly Liao
+date: November 25, 2026
+---
+
+In 2018, Reuters reported that Amazon developed an experimental AI recruitment tool to automate resume screening. The system was trained using resumes submitted to Amazon over a ten-year period and attempted to rank applicants from one to five stars. However, because most of the resumes came from men, the algorithm learned patterns that favoured male applicants; it penalized resumes containing the word "women's" and downgraded graduates from two women's colleges. Although Amazon attempted to correct these biases, it could not guarantee that the algorithm would not discriminate in other ways. The company eventually abandoned the project.
+
+The ethical dilemma What concerns me about this example is that AI is increasingly being used everywhere, including as a filter between applicants and recruiters. As an international student, visa-sponsership is something we have to consider when applying for jobs, and I am concerned that the AI has been applied to mark-down or even filter out applications for those who need sponsership. The dilemma the use of algorithm and large data and AI is I have to consider whether a company is willing to sponsor my visa when applying for internships/ jobs. I wonder if an AI system saw the words "visa sponsorship" in my application and interpreted them negatively. Even if I have the qualifications for a position, I could potentially be filtered out before a human recruiter has the opportunity to review my application. This makes me question whether AI recruitment actually makes hiring more objective or simply makes existing biases less visible.
+
+
+In this report, we will explore the ethics in data science realm. Inspired by Data feminism... I will answer the following question. We will look into an article.... and from a different perspective... 
+
+The article is taken from.... 
+
+the data science component...
+the delimma: 
+
+Respond to at least 4 of the items below (from the list of questions or from the Data Values and Principles manifesto). Include four separate paragraphs that explain both the issue (e.g., consent) and how the issue played out in the data science example. Note: totally fine if there are items that were done well in your example.
+
+Given what you described in #3 (above), summarize by explaining why it matters. Who benefits? Who is neglected or harmed? Were the ethical violations in the interest of profit? Surveillance? Power?
+
+
+
+Potential questions to respond to:
+What is the permission structure for using the data? Was it followed?
+
+What was the consent structure for recruiting participants? Were the participants aware of the ways their data would be used for research? Was informed consent possible? Can you provide informed consent for applications that are yet foreseen?
+
+What was the data collection process? Were the observations collected ethically? Are there missing observations?
+
+Were the data made publicly available? Why? How? On what platform?
+
+Is the data identifiable? All of it? Some of it? In what way? Are the data sufficiently anonymized or old to be free of ethical concerns? Is anonymity guaranteed?
+
+How were the variables collected? Were they accurately recorded? Is there any missing data?
+
+Who was measured? Are those individuals representative of the people to whom we’d like to generalize / apply the algorithm? Should we analyze data if we do not know how the data were collected?
+
+Is the data being used in unintended ways to the original study?
+
+Should race be used as a variable? Is it a proxy for something else (e.g., amount of melanin in the skin, stress of navigating microaggressions, zip-code, etc.)? What about gender?
+
+there were 689,003 "participants" in this Facebook study. are they aware of their data being collected? consent? 
+
+"As such, it was consistent with Facebook’s Data Use Policy, to which all users agree prior to creating an account on Facebook, constituting informed consent for this research." - i don't think people are aware of this... "The experiments took place for 1 wk (January 11–18, 2012). Participants were randomly selected based on their User ID, resulting in a total of ∼155,000 participants per condition who posted at least one status update during the experimental period"
